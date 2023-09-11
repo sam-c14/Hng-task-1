@@ -17,9 +17,30 @@ app.get("/api", (req, res) => {
   const slackName = req.query.slack_name;
   const track = req.query.track;
   const today = new Date();
-  const options = { weekday: "long" }; // You can also use 'short' or 'narrow' for abbreviated names
+  const options = { weekday: "long" };
+  const currentUtcTime = new Date().toUTCString();
+  let utcTime;
   const currentDay = today.toLocaleDateString("en-US", options);
-  const utcTime = today.toUTCString();
+
+  // Define the validation range in hours
+  const validationRange = 2; // +/- 2 hours
+
+  // Calculate the minimum and maximum valid times
+  const minValidTime = new Date(Date.now() - validationRange * 60 * 60 * 1000);
+  const maxValidTime = new Date(Date.now() + validationRange * 60 * 60 * 1000);
+
+  // Parse the current UTC time as a Date object
+  const currentUtcTimeDate = new Date(currentUtcTime);
+
+  // Perform validation
+  if (
+    currentUtcTimeDate >= minValidTime &&
+    currentUtcTimeDate <= maxValidTime
+  ) {
+    utcTime = currentUtcTimeDate;
+  } else {
+    utcTime = "Current UTC time is outside the valid range.";
+  }
 
   return res.json({
     slack_name: slackName,
