@@ -32,12 +32,16 @@ app.get("/api", (req, res) => {
   // Parse the current UTC time as a Date object
   const currentUtcTimeDate = new Date(currentUtcTime);
 
+  //   console.log('wow');
+
   // Perform validation
   if (
     currentUtcTimeDate >= minValidTime &&
     currentUtcTimeDate <= maxValidTime
   ) {
-    utcTime = new Date().toISOString();
+    date = new Date().toISOString();
+    console.log(date);
+    utcTime = date.split(".")[0] + date[date.length - 1];
   } else {
     utcTime = "Current UTC time is outside the valid range.";
   }
