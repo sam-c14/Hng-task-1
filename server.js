@@ -37,7 +37,7 @@ app.get("/api", (req, res) => {
     currentUtcTimeDate >= minValidTime &&
     currentUtcTimeDate <= maxValidTime
   ) {
-    utcTime = currentUtcTimeDate;
+    utcTime = new Date().toISOString();
   } else {
     utcTime = "Current UTC time is outside the valid range.";
   }
