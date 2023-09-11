@@ -19,7 +19,8 @@ app.get("/api", (req, res) => {
     current_day: currentDay,
     utc_time: utcTime,
     track,
-    github_file_url: "",
+    github_file_url:
+      "https://github.com/sam-c14/Hng-task-1/blob/865108d1aaf18290b61c854201ca534fd6137c9c/server.js",
     github_repo_url: "https://github.com/sam-c14/Hng-task-1.git",
     status: 200,
   });
