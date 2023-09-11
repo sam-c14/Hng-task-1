@@ -5,8 +5,13 @@ const port = process.env.PORT || 5000;
 
 require("dotenv").config();
 
-app.use(cors);
+app.use(cors());
 app.use(express.json());
+
+// app.get("/", (req, res) => {
+//   console.log("Hello World");
+//   return res.send("Hii");
+// });
 
 app.get("/api", (req, res) => {
   const slackName = req.query.slack_name;
@@ -16,7 +21,7 @@ app.get("/api", (req, res) => {
   const currentDay = today.toLocaleDateString("en-US", options);
   const utcTime = today.toUTCString();
 
-  res.json({
+  return res.json({
     slack_name: slackName,
     current_day: currentDay,
     utc_time: utcTime,
@@ -29,5 +34,5 @@ app.get("/api", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("App listening on port 5000");
+  console.log("App listening on port " + port);
 });
